@@ -1,0 +1,37 @@
+[build-system]
+requires = ["maturin>=1.9,<2"]
+build-backend = "maturin"
+
+[project]
+name = "pywhichlang"
+version = "0.1.0"
+description = "Python bindings for Quickwit's whichlang language detector"
+readme = "README.md"
+requires-python = ">=3.12"
+
+[dependency-groups]
+dev = ["maturin>=1.9,<2", "pytest>=8,<10"]
+
+[tool.maturin]
+python-source = "python"
+module-name = "pywhichlang._core"
+features = ["pyo3/extension-module"]
+locked = true
+include = [
+    { path = "tests/*.py", format = "sdist" },
+    { path = ".python-version", format = "sdist" },
+    { path = "uv.lock", format = "sdist" },
+]
+exclude = ["dist/**", "target/**", ".venv/**", "**/__pycache__/**", ".pytest_cache/**"]
+
+[tool.uv]
+cache-keys = [
+    { file = "pyproject.toml" },
+    { file = "Cargo.toml" },
+    { file = "Cargo.lock" },
+    { file = "src/**/*.rs" },
+    { file = "python/**/*.pyi" },
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

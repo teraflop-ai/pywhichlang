@@ -1,0 +1,20 @@
+[package]
+name = "pywhichlang"
+version = "0.1.0"
+edition = "2021"
+description = "Python bindings for Quickwit's whichlang language detector"
+publish = false
+
+[lib]
+name = "_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.27.2", features = ["abi3-py312"] }
+rayon = "1.12"
+whichlang = "=0.1.1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"

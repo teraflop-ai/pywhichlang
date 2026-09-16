@@ -1,0 +1,6 @@
+from collections.abc import Sequence
+
+LANGUAGES: tuple[str, ...]
+
+def detect_language(text: str) -> str: ...
+def detect_languages(texts: Sequence[str]) -> list[str]: ...
